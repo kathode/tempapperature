@@ -8,3 +8,17 @@ export const createElement = (tag, attributes = {}, ...children) => {
   }
   return element;
 };
+
+export const get = async (url) => {
+  try {
+    const response = await fetch(url);
+
+    if (response.ok) {
+      return response.json();
+    } else {
+      return response.status;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
