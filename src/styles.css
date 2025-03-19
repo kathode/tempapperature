@@ -21,6 +21,17 @@
   font-weight: 600;
 }
 
+.current-temp {
+  background: black;
+  position: absolute;
+  left: var(--current-temp, 0px);
+  top: -1px;
+
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 100%;
+}
+
 .results {
   display: flex;
   flex-direction: column;
@@ -31,7 +42,6 @@
   height: 0.4rem;
   background-image: linear-gradient(to right, #a0d3e4, #92d392, #dbdb43, #f0a313, #f56d13);
   border-radius: 0px;
-
   position: relative;
 }
 
