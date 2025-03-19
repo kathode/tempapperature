@@ -43,8 +43,8 @@ form.addEventListener("submit", async (event) => {
     for (const day of results.days) {
       const column = createElement("div", { className: "column" });
       const tempRange = createElement("div", { className: "row range" });
-      const minWidth = ((day.tempmin - range.min) / (range.max - range.min)) * 100;
-      const maxWidth = ((range.max - day.tempmax) / (range.max - range.min)) * 100;
+      const minWidth = ((day.tempmin - range.min) / (range.max - range.min)) * 150;
+      const maxWidth = ((range.max - day.tempmax) / (range.max - range.min)) * 150;
 
       tempRange.style.setProperty("--before-width", `${Math.round(minWidth)}px`);
       tempRange.style.setProperty("--after-width", `${Math.round(maxWidth)}px`);
