@@ -50,6 +50,9 @@ form.addEventListener("submit", async (event) => {
       tempRange.style.setProperty("--after-width", `${Math.round(maxWidth)}px`);
 
       if (isToday(day.datetime)) {
+        const currentTemp = createElement("div", { className: "current-temp" });
+        currentTemp.style.setProperty("--current-temp", `${Math.round(((day.temp - range.min) / (range.max - range.min)) * 150) - 4}px`);
+        tempRange.append(currentTemp);
         column.append(
           createElement("div", { className: "row", textContent: `Today` }),
           createElement("div", { className: "row center min-temp", textContent: `${Math.round(day.tempmin)}°` }),
