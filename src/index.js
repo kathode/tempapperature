@@ -1,0 +1,70 @@
+import { format, isToday } from "date-fns";
+import { createElement, get } from "./helpers";
+import "./styles.css";
+
+const getWeather = async (location) => {
+  return await get(
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=69GGTP2KYUASSNS52RGQW5QVT&contentType=json`
+  );
+};
+
+const getRange = (days) => {
+  let min = 100;
+  let max = 0;
+
+  for (const day of days) {
+    if (day.tempmin < min) {
+      min = day.tempmin;
+    }
+    if (day.tempmax > max) {
+      max = day.tempmax;
+    }
+  }
+
+  return { min, max };
+};
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const location = event.target.elements.location.value;
+  const text = document.querySelector(".results");
+
+  let results;
+  try {
+    results = await getWeather(location);
+    console.log(results.days);
+    const range = getRange(results.days);
+    console.log(range);
+    for (const day of results.days) {
+      const column = createElement("div", { className: "column" });
+      const tempRange = createElement("div", { className: "row range" });
+      const minWidth = ((day.tempmin - range.min) / (range.max - range.min)) * 100;
+      const maxWidth = ((range.max - day.tempmax) / (range.max - range.min)) * 100;
+
+      tempRange.style.setProperty("--before-width", `${minWidth}px`);
+      tempRange.style.setProperty("--after-width", `${maxWidth}px`);
+
+      if (isToday(day.datetime)) {
+        column.append(
+          createElement("div", { className: "row", textContent: `Today` }),
+          createElement("div", { className: "row center min-temp", textContent: `${day.tempmin}°` }),
+          tempRange,
+          createElement("div", { className: "row center max-temp", textContent: `${day.tempmax}°` })
+        );
+        text.append(column);
+      } else {
+        column.append(
+          createElement("div", { className: "row", textContent: format(day.datetime, "EEE") }),
+          createElement("div", { className: "row center min-temp", textContent: `${day.tempmin}°` }),
+          tempRange,
+          createElement("div", { className: "row center max-temp", textContent: `${day.tempmax}°` })
+        );
+        text.append(column);
+      }
+    }
+  } catch (e) {
+    text.textContent.e;
+  }
+});
