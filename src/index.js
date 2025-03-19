@@ -21,6 +21,9 @@ const getRange = (days) => {
     }
   }
 
+  min = Math.round(min);
+  max = Math.round(max);
+
   return { min, max };
 };
 
@@ -43,23 +46,23 @@ form.addEventListener("submit", async (event) => {
       const minWidth = ((day.tempmin - range.min) / (range.max - range.min)) * 100;
       const maxWidth = ((range.max - day.tempmax) / (range.max - range.min)) * 100;
 
-      tempRange.style.setProperty("--before-width", `${minWidth}px`);
-      tempRange.style.setProperty("--after-width", `${maxWidth}px`);
+      tempRange.style.setProperty("--before-width", `${Math.round(minWidth)}px`);
+      tempRange.style.setProperty("--after-width", `${Math.round(maxWidth)}px`);
 
       if (isToday(day.datetime)) {
         column.append(
           createElement("div", { className: "row", textContent: `Today` }),
-          createElement("div", { className: "row center min-temp", textContent: `${day.tempmin}°` }),
+          createElement("div", { className: "row center min-temp", textContent: `${Math.round(day.tempmin)}°` }),
           tempRange,
-          createElement("div", { className: "row center max-temp", textContent: `${day.tempmax}°` })
+          createElement("div", { className: "row center max-temp", textContent: `${Math.round(day.tempmax)}°` })
         );
         text.append(column);
       } else {
         column.append(
           createElement("div", { className: "row", textContent: format(day.datetime, "EEE") }),
-          createElement("div", { className: "row center min-temp", textContent: `${day.tempmin}°` }),
+          createElement("div", { className: "row center min-temp", textContent: `${Math.round(day.tempmin)}°` }),
           tempRange,
-          createElement("div", { className: "row center max-temp", textContent: `${day.tempmax}°` })
+          createElement("div", { className: "row center max-temp", textContent: `${Math.round(day.tempmax)}°` })
         );
         text.append(column);
       }
