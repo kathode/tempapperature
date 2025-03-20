@@ -37,6 +37,9 @@ form.addEventListener("submit", async (event) => {
 
   let results;
   try {
+    text.textContent = "";
+    text.append(createElement("div", { className: "loader" }));
+
     results = await getWeather(location);
     const range = getRange(results.days);
     text.textContent = "";
