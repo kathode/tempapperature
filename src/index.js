@@ -1,5 +1,6 @@
 import { format, isToday } from "date-fns";
 import { createElement, get } from "./helpers";
+import { weatherIcons } from "./assets/weather-icons";
 import "./styles.css";
 
 const getWeather = async (location) => {
@@ -37,9 +38,9 @@ form.addEventListener("submit", async (event) => {
   let results;
   try {
     results = await getWeather(location);
-    console.log(results.days);
     const range = getRange(results.days);
-    console.log(range);
+    text.textContent = "";
+
     for (const day of results.days) {
       const column = createElement("div", { className: "column" });
       const tempRange = createElement("div", { className: "row range" });
@@ -55,6 +56,7 @@ form.addEventListener("submit", async (event) => {
         tempRange.append(currentTemp);
         column.append(
           createElement("div", { className: "row", textContent: `Today` }),
+          createElement("img", { className: "row", src: weatherIcons[day.icon], alt: day.icon }),
           createElement("div", { className: "row center min-temp", textContent: `${Math.round(day.tempmin)}°` }),
           tempRange,
           createElement("div", { className: "row center max-temp", textContent: `${Math.round(day.tempmax)}°` })
@@ -63,6 +65,7 @@ form.addEventListener("submit", async (event) => {
       } else {
         column.append(
           createElement("div", { className: "row", textContent: format(day.datetime, "EEE") }),
+          createElement("img", { className: "row", src: weatherIcons[day.icon], alt: day.icon }),
           createElement("div", { className: "row center min-temp", textContent: `${Math.round(day.tempmin)}°` }),
           tempRange,
           createElement("div", { className: "row center max-temp", textContent: `${Math.round(day.tempmax)}°` })
@@ -71,6 +74,7 @@ form.addEventListener("submit", async (event) => {
       }
     }
   } catch (e) {
-    text.textContent.e;
+    text.textContent = "";
+    text.textContent = e;
   }
 });
