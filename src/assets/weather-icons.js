@@ -13,6 +13,7 @@ import showersNight from "./showers-night.png";
 import snowShowers from "./snow-showers.png";
 import snow from "./snow.png";
 import sunrise from "./sunrise.png";
+import sunset from "./sunset.png";
 import thunderRain from "./thunder-rain.png";
 import wind from "./wind.png";
 
@@ -32,6 +33,7 @@ export const weatherIcons = {
   "snow-showers": snowShowers,
   snow: snow,
   sunrise: sunrise,
+  sunset: sunset,
   "thunder-rain": thunderRain,
   wind: wind,
 };
