@@ -14,11 +14,19 @@ export const get = async (url) => {
     const response = await fetch(url);
 
     if (response.ok) {
-      return response.json();
+      try {
+        return await response.json();
+      } catch (jsonError) {
+        console.log("Error parsing JSON:", jsonError);
+        throw jsonError;
+      }
     } else {
-      return response.status;
+      const error = new Error(`HTTP error! status: ${response.status}`);
+      console.log(error);
+      throw error;
     }
   } catch (e) {
-    console.log(e);
+    console.log("Network error:", e);
+    throw e;
   }
 };
