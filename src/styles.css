@@ -9,6 +9,11 @@
   align-self: center;
 }
 
+img {
+  height: 1.5rem;
+  max-width: 1.5rem;
+}
+
 .center {
   text-align: center;
 }
