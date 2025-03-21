@@ -118,7 +118,7 @@ const hourlyForecast = (results) => {
   addSuns(newTodayHours, today);
 
   // On the start of the new day, newNextDayHours is empty due to slicing
-  if (currentHour === 0) {
+  if (currentHour !== 0) {
     addSuns(newNextDayHours, nextDay);
   }
 
