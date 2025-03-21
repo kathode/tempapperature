@@ -156,7 +156,14 @@ const hourlyForecast = (results) => {
 };
 
 const dayDescription = (results) => {
-  console.log(results);
+  const text = document.querySelector(".results");
+  const container = createElement("div", { className: "container" });
+
+  container.append(
+    createElement("div", { textContent: results.resolvedAddress, className: "resolved-address" }),
+    createElement("div", { textContent: results.description })
+  );
+  text.append(container);
 };
 
 const form = document.querySelector("form");
