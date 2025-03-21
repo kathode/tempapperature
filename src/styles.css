@@ -1,7 +1,29 @@
+.container {
+  background-color: #615f5f89;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
 .column {
   display: flex;
+  justify-content: space-between;
   border-top: 1px solid #000000;
   height: 2.5rem;
+}
+
+.weather-range {
+  display: flex;
+  height: 2.5rem;
+}
+
+.view-header {
+  font-weight: 600;
+  font-size: large;
+  padding-bottom: 1rem;
+}
+
+.view-header.hourly {
+  border-bottom: 1px solid black;
 }
 
 .row {
@@ -19,7 +41,7 @@ img {
 }
 
 .min-temp {
-  color: gray;
+  color: rgb(198, 198, 198);
 }
 
 .max-temp {
@@ -28,6 +50,7 @@ img {
 
 .current-temp {
   background: black;
+  outline: 2px solid white;
   position: absolute;
   left: var(--current-temp, 0px);
   top: -1px;
@@ -69,6 +92,8 @@ img {
 .results {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 0;
 }
 
 .range {
