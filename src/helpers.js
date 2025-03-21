@@ -1,3 +1,5 @@
+import { getHours, parse } from "date-fns";
+
 export const createElement = (tag, attributes = {}, ...children) => {
   const element = document.createElement(tag);
   for (const [key, value] of Object.entries(attributes)) {
@@ -29,4 +31,9 @@ export const get = async (url) => {
     console.log("Network error:", e);
     throw e;
   }
+};
+
+export const getHourFromTime = (time) => {
+  const parsedDate = parse(time, "HH:mm:ss", new Date()); // Parse with a dummy date
+  return getHours(parsedDate);
 };
