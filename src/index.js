@@ -109,14 +109,16 @@ const hourlyForecast = (results) => {
   const text = document.querySelector(".results");
   const currentHour = getHours(new Date());
 
-  const currentDay = results.days[0];
+  const today = results.days[0];
   const nextDay = results.days[1];
-  const newTodayHours = currentDay.hours.slice(currentHour, 24);
-  const copyofNewTodayHours = [...newTodayHours];
+
+  const newTodayHours = today.hours.slice(currentHour, 24);
   const newNextDayHours = nextDay.hours.slice(0, -(24 - currentHour));
 
-  addSuns(newTodayHours, currentDay);
-  if (copyofNewTodayHours.length < 24) {
+  addSuns(newTodayHours, today);
+
+  // On the start of the new day, newNextDayHours is empty due to slicing
+  if (currentHour === 0) {
     addSuns(newNextDayHours, nextDay);
   }
 
@@ -153,6 +155,10 @@ const hourlyForecast = (results) => {
   text.append(container);
 };
 
+const dayDescription = (results) => {
+  console.log(results);
+};
+
 const form = document.querySelector("form");
 
 form.addEventListener("submit", async (event) => {
@@ -167,6 +173,7 @@ form.addEventListener("submit", async (event) => {
     results = await getWeather(location);
     text.textContent = "";
 
+    dayDescription(results);
     hourlyForecast(results);
     daysForecast(results);
   } catch (e) {
