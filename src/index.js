@@ -44,8 +44,11 @@ const daysForecast = (results) => {
     tempRange.style.setProperty("--after-width", `${Math.round(maxWidth)}px`);
 
     if (isToday(day.datetime)) {
+      const currentHour = getHours(new Date());
       const currentTemp = createElement("div", { className: "current-temp" });
-      currentTemp.style.setProperty("--current-temp", `${Math.round(((day.temp - range.min) / (range.max - range.min)) * 150) - 4}px`);
+
+      const calc = Math.round(((day.hours[currentHour].temp - range.min) / (range.max - range.min)) * 150) - 4;
+      currentTemp.style.setProperty("--current-temp", `${calc}px`);
       tempRange.append(currentTemp);
 
       column.append(
