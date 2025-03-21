@@ -110,7 +110,7 @@ const addSuns = (hours, day) => {
 
 const hourlyForecast = (results) => {
   const text = document.querySelector(".results");
-  const currentHour = getHours(new Date());
+  const currentHour = Number(new Date().toLocaleString("en-AU", { timeZone: results.timezone, hour: "numeric", hour12: false }));
 
   const today = results.days[0];
   const nextDay = results.days[1];
@@ -131,7 +131,7 @@ const hourlyForecast = (results) => {
   for (const hours of [...newTodayHours, ...newNextDayHours]) {
     const row = createElement("div", { className: "hourly-row" });
 
-    if (getHourFromTime(hours.datetime) == format(new Date(), "HH")) {
+    if (getHourFromTime(hours.datetime) == currentHour) {
       row.append(
         createElement("div", { className: "hourly-time", textContent: "Now" }),
         createElement("img", { className: "", src: weatherIcons[hours.icon], alt: hours.icon }),
