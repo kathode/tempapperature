@@ -155,3 +155,58 @@ img {
   flex-direction: column;
   gap: 0.75rem;
 }
+
+#content {
+  max-width: 30rem;
+  margin: auto;
+}
+
+body {
+  background-color: #3c424b;
+  color: white;
+}
+
+.capitalise::first-letter {
+  text-transform: capitalize;
+}
+
+form {
+  padding-top: 3rem;
+}
+
+input {
+  height: 4rem;
+  width: 100%;
+  padding: 1rem 4rem 1rem 1rem;
+  box-sizing: border-box;
+
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  background-color: #615f5f89;
+  border: none;
+  color: white;
+}
+
+input::placeholder {
+  color: white;
+}
+
+input:focus {
+  outline: 0.25rem solid #313030d1;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper::after {
+  content: "";
+  position: absolute;
+  height: 4rem;
+  width: 3rem;
+  right: 0.75rem;
+  top: 0;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1zZWFyY2giPjxjaXJjbGUgY3g9IjExIiBjeT0iMTEiIHI9IjgiLz48cGF0aCBkPSJtMjEgMjEtNC4zLTQuMyIvPjwvc3ZnPg==");
+  background-repeat: no-repeat;
+  background-position: center;
+}
