@@ -128,21 +128,21 @@ const hourlyForecast = (results) => {
 
     if (getHourFromTime(hours.datetime) == format(new Date(), "HH")) {
       row.append(
-        createElement("div", { className: "", textContent: "Now" }),
+        createElement("div", { className: "hourly-time", textContent: "Now" }),
         createElement("img", { className: "", src: weatherIcons[hours.icon], alt: hours.icon }),
-        createElement("div", { className: "capitalise", textContent: `${Math.round(hours.temp)}°` })
+        createElement("div", { className: "padding-left capitalise", textContent: `${Math.round(hours.temp)}°` })
       );
     } else if (hours.icon === "sunrise" || hours.icon === "sunset") {
       row.append(
-        createElement("div", { className: "", textContent: String(hours.datetime.split("").slice(0, 5)).replaceAll(",", "") }),
+        createElement("div", { className: "hourly-time", textContent: String(hours.datetime.split("").slice(0, 5)).replaceAll(",", "") }),
         createElement("img", { className: "", src: weatherIcons[hours.icon], alt: hours.icon }),
         createElement("div", { className: "capitalise", textContent: hours.icon })
       );
     } else {
       row.append(
-        createElement("div", { className: "", textContent: hours.datetime.split(":")[0] }),
+        createElement("div", { className: "hourly-time", textContent: hours.datetime.split(":")[0] }),
         createElement("img", { className: "", src: weatherIcons[hours.icon], alt: hours.icon }),
-        createElement("div", { className: "", textContent: `${Math.round(hours.temp)}°` })
+        createElement("div", { className: "padding-left", textContent: `${Math.round(hours.temp)}°` })
       );
     }
 
