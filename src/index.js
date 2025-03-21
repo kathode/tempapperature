@@ -79,6 +79,80 @@ const daysForecast = (results) => {
   text.append(container);
 };
 
+const addSuns = (hours, day) => {
+  const earliestHour = getHourFromTime(hours[0].datetime);
+  const sunriseHour = getHourFromTime(day.sunrise);
+  const sunsetHour = getHourFromTime(day.sunset);
+
+  if (earliestHour < sunriseHour) {
+    const index = hours.findIndex((hour) => getHourFromTime(hour.datetime) === sunriseHour);
+
+    if (index === -1) {
+      return;
+    }
+
+    hours.splice(index + 1, 0, { datetime: day.sunrise, icon: "sunrise" });
+  }
+
+  if (earliestHour < sunsetHour) {
+    const index = hours.findIndex((hour) => getHourFromTime(hour.datetime) === sunsetHour);
+
+    if (index === -1) {
+      return;
+    }
+
+    hours.splice(index + 1, 0, { datetime: day.sunset, icon: "sunset" });
+  }
+};
+
+const hourlyForecast = (results) => {
+  const text = document.querySelector(".results");
+  const currentHour = getHours(new Date());
+
+  const currentDay = results.days[0];
+  const nextDay = results.days[1];
+  const newTodayHours = currentDay.hours.slice(currentHour, 24);
+  const copyofNewTodayHours = [...newTodayHours];
+  const newNextDayHours = nextDay.hours.slice(0, -(24 - currentHour));
+
+  addSuns(newTodayHours, currentDay);
+  if (copyofNewTodayHours.length < 24) {
+    addSuns(newNextDayHours, nextDay);
+  }
+
+  const container = createElement("div", { className: "container" });
+  const div = createElement("div", { className: "hourly-view" });
+
+  for (const hours of [...newTodayHours, ...newNextDayHours]) {
+    const row = createElement("div", { className: "hourly-row" });
+
+    if (getHourFromTime(hours.datetime) == format(new Date(), "HH")) {
+      row.append(
+        createElement("div", { className: "", textContent: "Now" }),
+        createElement("img", { className: "", src: weatherIcons[hours.icon], alt: hours.icon }),
+        createElement("div", { className: "capitalise", textContent: `${Math.round(hours.temp)}°` })
+      );
+    } else if (hours.icon === "sunrise" || hours.icon === "sunset") {
+      row.append(
+        createElement("div", { className: "", textContent: String(hours.datetime.split("").slice(0, 5)).replaceAll(",", "") }),
+        createElement("img", { className: "", src: weatherIcons[hours.icon], alt: hours.icon }),
+        createElement("div", { className: "capitalise", textContent: hours.icon })
+      );
+    } else {
+      row.append(
+        createElement("div", { className: "", textContent: hours.datetime.split(":")[0] }),
+        createElement("img", { className: "", src: weatherIcons[hours.icon], alt: hours.icon }),
+        createElement("div", { className: "", textContent: `${Math.round(hours.temp)}°` })
+      );
+    }
+
+    div.append(row);
+  }
+
+  container.append(createElement("div", { textContent: "Hourly forecast", className: "view-header hourly" }), div);
+  text.append(container);
+};
+
 const form = document.querySelector("form");
 
 form.addEventListener("submit", async (event) => {
@@ -93,6 +167,7 @@ form.addEventListener("submit", async (event) => {
     results = await getWeather(location);
     text.textContent = "";
 
+    hourlyForecast(results);
     daysForecast(results);
   } catch (e) {
     text.textContent = "";
