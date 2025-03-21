@@ -221,3 +221,9 @@ input:focus {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.resolved-address {
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
+}
