@@ -65,6 +65,7 @@ img {
   height: 0.5rem;
   width: 0.5rem;
   border-radius: 100%;
+  z-index: 10;
 }
 
 .loader {
