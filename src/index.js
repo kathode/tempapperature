@@ -5,7 +5,7 @@ import "./styles.css";
 
 const getWeather = async (location) => {
   return await get(
-    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=69GGTP2KYUASSNS52RGQW5QVT&contentType=json`
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=EQ2SHR68M2XWPVVZH4783SLAA&contentType=json`
   );
 };
 
